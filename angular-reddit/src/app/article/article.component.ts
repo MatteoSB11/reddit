@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-article',
@@ -7,8 +7,22 @@ import { Component } from '@angular/core';
   styleUrl: './article.component.css'
 })
 export class ArticleComponent {
-  article = {
-    title: 'Titolo dell’articolo',
-    content: 'Questo è il contenuto dell’articolo.'
+    @HostBinding('attr.class') cssClass = 'card';
+    votes: number;
+    title: string;
+    link: string;
+    constructor() {
+      this.title = 'Angular 2';
+      this.link = 'http://angular.io';
+      this.votes = 10;
+    }
+    voteUp():Boolean { 
+      this.votes += 1;
+      return false;  
   }
-}
+  voteDown():Boolean{
+      this.votes -= 1;
+      return false; 
+  }
+    ngOnInit() {}
+  }    
