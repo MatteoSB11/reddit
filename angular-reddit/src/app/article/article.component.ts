@@ -6,23 +6,25 @@ import { Component, OnInit, HostBinding } from '@angular/core';
   templateUrl: './article.component.html',
   styleUrl: './article.component.css'
 })
-export class ArticleComponent {
-    @HostBinding('attr.class') cssClass = 'card';
-    votes: number;
-    title: string;
-    link: string;
-    constructor() {
-      this.title = 'Angular 2';
-      this.link = 'http://angular.io';
-      this.votes = 10;
-    }
-    voteUp():Boolean { 
-      this.votes += 1;
-      return false;  
+import { Article } from './article.model';
+
+export class ArticleComponent implements OnInit {
+  @HostBinding('attr.class') cssClass = 'card';
+  article:Article
+
+  constructor() {
+    this.article = new Article('Angular 2','http://angular.io',10);
   }
-  voteDown():Boolean{
-      this.votes -= 1;
-      return false; 
+
+  voteUp(): Boolean {
+    this.article.voteUp(); //Modificato qui 
+    return false;
   }
-    ngOnInit() {}
-  }    
+
+  voteDown():Boolean {
+    this.article.voteDown(); //Modificato qui
+    return false;
+  }
+
+  ngOnInit() {}
+}
